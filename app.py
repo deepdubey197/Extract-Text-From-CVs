@@ -1,6 +1,6 @@
 import os
 import re
-from PyPDF2 import PdfFileReader
+from PyPDF2 import PdfReader
 from docx import Document
 from openpyxl import Workbook
 import streamlit as st
@@ -15,10 +15,10 @@ def extract_text_from_docx(file_path):
 
 def extract_text_from_pdf(file_path):
     with open(file_path, 'rb') as file:
-        reader = PyPDF2.PdfFileReader(file)
+        reader = PdfReader(file)
         text = ''
-        for page_num in range(reader.numPages):
-            text += reader.getPage(page_num).extractText()
+        for page_num in range(len(reader.pages)):
+            text += reader.pages[page_num].extract_text()
     return text
 
 def extract_info(text):
@@ -67,7 +67,7 @@ def process_folder(folder_path, output_file):
         os.rmdir('temp_folder')
 
 def main():
-    st.title('AI Enabled CV Information Extractor')
+    st.title('CV Information Extractor')
     st.markdown('This app extracts information from CVs.')
     
 
