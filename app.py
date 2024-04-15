@@ -1,6 +1,6 @@
 import os
 import re
-from PyPDF2 import PdfReader
+from PyPDF2 import PdfFileReader
 from docx import Document
 from openpyxl import Workbook
 import streamlit as st
